@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="triangle" class="org.com.spring.app.Triangle">
+		<property name="height" value="10"></property>
+		<property name="breadth" value="20"></property>
+	</bean>
+	
+	<bean id="shape_triangle" class="org.com.spring.app.Triangle">
+		<constructor-arg value="10"/>
+		<constructor-arg value="10"/>
+	</bean>
+	<bean id="shape" class="org.com.spring.app.Square">
+		<property name="side" value="20"></property>
+	</bean>
+	
+	<bean id="square" class="org.com.spring.app.Square">
+		<property name="side" value="20"></property>
+	</bean>
+	<bean id="parentDepartment" class="org.com.spring.app.data.Department"
+		abstract="true">
+		<property name="deptInfo">
+			<bean id="deptInfo" class="org.com.spring.app.data.DeptInfo">
+				<property name="deptNo" value="1" />
+				<property name="deptName" value="Computer Science" />
+			</bean>
+		</property>
+		<property name="memberList">
+			<list>
+				<ref bean="member1" />
+				<ref bean="member2" />
+				<ref bean="member3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="department" class="org.com.spring.app.data.Department"
+		parent="parentDepartment">
+		<property name="memberList">
+			<list merge="true">
+				<ref bean="member4" />
+			</list>
+		</property>
+	</bean>
+	<bean id="deptAutoWire" class="org.com.spring.app.data.DeptAutoWire">
+		<property name="deptInfo">
+			<bean class="org.com.spring.app.data.DeptInfo">
+				<property name="deptNo" value="1" />
+				<property name="deptName" value="Computer Science" />
+			</bean>
+		</property>
+	</bean>
+	<bean scope="prototype" id="deptACAware" class="org.com.spring.app.data.DeptACAware"
+		autowire="byName">
+		<property name="deptInfo">
+			<bean class="org.com.spring.app.data.DeptInfo">
+				<property name="deptNo" value="1" />
+				<property name="deptName" value="Computer Science" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="member1" class="org.com.spring.app.data.Member">
+		<constructor-arg value="1" />
+		<constructor-arg value="Ramesh" />
+		<constructor-arg value="10000" />
+	</bean>
+	<bean id="member2" class="org.com.spring.app.data.Member">
+		<qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="member6"/>
+		<property name="num" value="2" />
+		<property name="name" value="Sunkari" />
+		<property name="salary" value="325135435" />
+	</bean>
+	<bean id="member3" class="org.com.spring.app.data.Member">
+		<property name="num" value="3" />
+		<property name="name" value="Babu" />
+		<property name="salary" value="8789786786786" />
+	</bean>
+	<bean id="member4" class="org.com.spring.app.data.Member">
+		<property name="num" value="${member4.num}" />
+		<property name="name" value="${member4.name}" />
+		<property name="salary" value="${member4.salary}" />
+	</bean>
+	<alias name="department" alias="dept-alias" />
+	<bean id="parentDept" class="org.com.spring.app.data.DeptInheritance">
+		<property name="member1" ref="member1" />
+	</bean>
+	<bean id="dept1" class="org.com.spring.app.data.DeptInheritance"
+		parent="parentDept">
+		<property name="member2" ref="member2" />
+		<property name="member3" ref="member3" />
+	</bean>
+	<bean id="dept2" class="org.com.spring.app.data.DeptInheritance"
+		parent="parentDept">
+		<property name="member1" ref="member2" />
+		<property name="member2" ref="member2" />
+		<property name="member3" ref="member2" />
+	</bean>
+	<!-- <bean class="org.com.spring.app.data.DisplayNameBeanPostProcessor" 
+		/> -->
+	<bean class="org.com.spring.app.data.MyBeanFactoryPP" />
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="membersConfig.properties"></property>
+	</bean>
+	<!-- <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	 --><context:annotation-config></context:annotation-config>
+	 <context:component-scan base-package="org.com.spring.app.data"></context:component-scan>
+	 
+	 <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	 	<property name="basenames">
+	 	<list>
+	 		<value>myMessages</value>
+	 	</list>
+	 	</property>
+	 </bean>
+</beans>
