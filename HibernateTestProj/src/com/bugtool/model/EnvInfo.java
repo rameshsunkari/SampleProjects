@@ -11,9 +11,9 @@ public class EnvInfo implements java.io.Serializable {
 	private String release;
 	private String username;
 	private String pswd;
-	private String bugid;
+	private Integer bugid;
 	private String customer;
-	private String createdby;
+	private Integer createdby;
 	private String remarks;
 
 	public EnvInfo() {
@@ -24,7 +24,7 @@ public class EnvInfo implements java.io.Serializable {
 	}
 
 	public EnvInfo(Integer id, String name, String release, String username,
-			String pswd, String bugid, String customer, String createdby,
+			String pswd, Integer bugid, String customer, Integer createdby,
 			String remarks) {
 		this.id = id;
 		this.name = name;
@@ -77,11 +77,11 @@ public class EnvInfo implements java.io.Serializable {
 		this.pswd = pswd;
 	}
 
-	public String getBugid() {
+	public Integer getBugid() {
 		return this.bugid;
 	}
 
-	public void setBugid(String bugid) {
+	public void setBugid(Integer bugid) {
 		this.bugid = bugid;
 	}
 
@@ -93,11 +93,11 @@ public class EnvInfo implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	public String getCreatedby() {
+	public Integer getCreatedby() {
 		return this.createdby;
 	}
 
-	public void setCreatedby(String createdby) {
+	public void setCreatedby(Integer createdby) {
 		this.createdby = createdby;
 	}
 
