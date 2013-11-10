@@ -10,6 +10,23 @@ public class Triangle {
 
 	public void setName(String name) {
 		this.name = name;
+		throw (new RuntimeException());
 	}
+
+	
+	public String showName(String name){
+		
+		this.name = name;
+		return name;
+//		throw (new RuntimeException());
+		
+		
+	}
+	@Override
+	public String toString() {
+		return "Triangle [name=" + name + "]";
+	}
+	
+	
 
 }

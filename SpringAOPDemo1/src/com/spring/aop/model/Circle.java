@@ -12,4 +12,11 @@ public class Circle {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Circle [name=" + name + "]";
+	}
+	
+	
+
 }

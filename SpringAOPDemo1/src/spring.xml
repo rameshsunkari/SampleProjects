@@ -9,10 +9,10 @@
 
 
 	<bean id="triangle" class="com.spring.aop.model.Triangle">
-		<property name="name" value="Triangle Name"></property>
+		<!-- <property name="name" value="Triangle Name"/> -->
 	</bean>
 	<bean id="circle" class="com.spring.aop.model.Circle">
-		<property name="name" value="Circle Name"></property>
+		<property name="name" value="Circle Name"/>
 	</bean>
 	<bean id="shapeService" class="com.test.aop.service.ShapeService"
 		autowire="byName"/>
