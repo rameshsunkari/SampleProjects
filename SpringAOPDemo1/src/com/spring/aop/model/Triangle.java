@@ -10,14 +10,14 @@ public class Triangle {
 
 	public void setName(String name) {
 		this.name = name;
-		throw (new RuntimeException());
+//		throw (new RuntimeException());
 	}
 
 	
 	public String showName(String name){
 		
 		this.name = name;
-		return name;
+		return "returned value is \t"+name;
 //		throw (new RuntimeException());
 		
 		

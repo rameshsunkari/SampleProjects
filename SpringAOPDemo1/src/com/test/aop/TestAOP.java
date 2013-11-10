@@ -13,7 +13,9 @@ public class TestAOP {
 		ShapeService shapeService = ctx.getBean("shapeService", ShapeService.class);
 		/*System.out.println(shapeService.getCircle().getName());
 		System.out.println(shapeService.getTriangle().getName());*/
-		shapeService.getTriangle().setName("Test Circle");
+//		shapeService.getTriangle().setName("Test Circle");
+//		System.out.println(shapeService.getCircle().getName());
+		shapeService.getCircle();
 
 	}
 

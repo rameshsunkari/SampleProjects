@@ -9,7 +9,7 @@
 
 
 	<bean id="triangle" class="com.spring.aop.model.Triangle">
-		<!-- <property name="name" value="Triangle Name"/> -->
+		<property name="name" value="Triangle Name"/>
 	</bean>
 	<bean id="circle" class="com.spring.aop.model.Circle">
 		<property name="name" value="Circle Name"/>
@@ -19,7 +19,19 @@
 		
 	<aop:aspectj-autoproxy/>
 	
-	<bean id="loggingAspect"
-		class="com.spring.aop.aspect.LoggingAspect"/>
+	<!-- <bean id="loggingAspect"
+		class="com.spring.aop.aspect.LoggingAspect"/> -->
+		
+	<aop:config>
+	<aop:aspect id="loggingAspect" ref="loggingAspectInXML">
+		<aop:pointcut expression="execution(* get*())" id="allGetters"/>
+		<aop:around method="myArroundAdvice" pointcut-ref="allGetters"/>
+	
+	</aop:aspect>
+	
+	</aop:config>
 
+	<bean id="loggingAspectInXML"
+		class="com.spring.aop.aspect.LoggingAspectInXML">
+	</bean>
 </beans>
