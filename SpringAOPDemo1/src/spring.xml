@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
@@ -9,29 +8,23 @@
 
 
 	<bean id="triangle" class="com.spring.aop.model.Triangle">
-		<property name="name" value="Triangle Name"/>
+		<property name="name" value="Triangle Name" />
 	</bean>
 	<bean id="circle" class="com.spring.aop.model.Circle">
-		<property name="name" value="Circle Name"/>
+		<property name="name" value="Circle Name" />
 	</bean>
 	<bean id="shapeService" class="com.test.aop.service.ShapeService"
-		autowire="byName"/>
-		
-	<aop:aspectj-autoproxy/>
-	
-	<!-- <bean id="loggingAspect"
-		class="com.spring.aop.aspect.LoggingAspect"/> -->
-		
-	<aop:config>
-	<aop:aspect id="loggingAspect" ref="loggingAspectInXML">
-		<aop:pointcut expression="execution(* get*())" id="allGetters"/>
-		<aop:around method="myArroundAdvice" pointcut-ref="allGetters"/>
-	
-	</aop:aspect>
-	
-	</aop:config>
+		autowire="byName" />
 
-	<bean id="loggingAspectInXML"
-		class="com.spring.aop.aspect.LoggingAspectInXML">
-	</bean>
+	<aop:aspectj-autoproxy />
+	<bean id="loggingAspectInXML" class="com.spring.aop.aspect.LoggingAspectInXML" />
+
+
+	<aop:config>
+		<aop:aspect id="loggingAspect" ref="loggingAspectInXML">
+			<aop:pointcut expression="execution(* get*())" id="allGetters" />
+			<aop:around method="myArroundAdvice" pointcut-ref="allGetters" />
+		</aop:aspect>
+
+	</aop:config>
 </beans>

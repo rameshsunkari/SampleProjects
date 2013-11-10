@@ -4,7 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 public class LoggingAspectInXML {
 
-	public Object myAroundAdvice(ProceedingJoinPoint joinPoint) {
+	public Object myArroundAdvice(ProceedingJoinPoint joinPoint) {
 		Object returnValue = null;
 
 		System.out.println("Before the Target method called");
