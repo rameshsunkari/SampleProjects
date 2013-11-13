@@ -19,5 +19,9 @@ public class LoggingAspectInXML {
 		return returnValue;
 
 	}
+	
+	public  void loggingAdvice(){
+		System.out.println("Calling the loggin advice from an aspect");
+	}
 
 }
