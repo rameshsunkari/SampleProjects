@@ -6,7 +6,7 @@
   <name>SpringDemo</name>
   <description>SpringDemo</description>
   
-  <properties>
+  	<properties>
 		<spring.version>3.2.13.RELEASE</spring.version>
 	</properties>
  
