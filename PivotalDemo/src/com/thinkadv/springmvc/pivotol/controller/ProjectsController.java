@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.thinkadv.springmvc.pivotol.model.Projects;
 
@@ -28,7 +28,7 @@ public class ProjectsController {
 	private RestTemplate restTemplate;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listProjects(ModelMap model, HttpServletRequest request) {
+	public @ResponseBody Projects listProjects(ModelMap model, HttpServletRequest request) {
 
 		model.addAttribute("message", "Spring 4 MVC Hello World");
 
@@ -36,10 +36,10 @@ public class ProjectsController {
 				"X-TrackerToken");
 
 		List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
-		acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+		acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_XML);
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.setAccept(acceptableMediaTypes);
 		headers.add("X-TrackerToken", tokenAttribute);
 
@@ -50,11 +50,10 @@ public class ProjectsController {
 				HttpMethod.GET, getTokenRequest, Projects.class);
 		model.put("name", response.getBody().getProject().getName());
 		
-		ModelAndView modelView = new ModelAndView("projectsList", "message",
-				"Project Info List");
 		
-		modelView.addObject("projectInfoList", response.getBody());
-		return modelView;
+		
+		model.put("projectInfoList", response.getBody());
+		return response.getBody();
 
 	}
 

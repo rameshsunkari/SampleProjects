@@ -34,7 +34,7 @@
 		<property name="order" value="1" />
 		<property name="mediaTypes">
 			<map>
-				<entry key="xml" value="application/xml" />
+				<!-- <entry key="xml" value="application/xml" /> -->
 				<entry key="json" value="application/json" />
 			</map>
 		</property>

@@ -11,10 +11,6 @@
 <h1>View Projects</h1>
 project name: ${name }
 
-<c:forEach items="${projectInfoList}" var="project">
-		${project.id} ${project.name}: ${project.account}
-		<br />
-	</c:forEach>
 
 
 </body>
