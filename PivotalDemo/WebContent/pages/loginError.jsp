@@ -21,7 +21,7 @@
 
 		<tr>
 
-			<td><a href="loginForm.jsp">Retry</a></td>
+			<td><a href="login">Retry</a></td>
 
 		</tr>
 

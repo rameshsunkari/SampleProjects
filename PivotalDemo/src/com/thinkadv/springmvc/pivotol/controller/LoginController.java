@@ -1,13 +1,19 @@
 package com.thinkadv.springmvc.pivotol.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,6 +26,9 @@ import com.thinkadv.springmvc.pivotol.model.UserToken;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@RequestMapping(value="login",method = RequestMethod.GET)
 	public String showForm(Map<String, LoginForm> model) {
@@ -30,7 +39,7 @@ public class LoginController {
 
 	@RequestMapping(value="/loginAction",method = RequestMethod.POST)
 	public String processForm(@Valid LoginForm loginForm, BindingResult result,
-			Map<String, LoginForm> model) {
+			Map<String, LoginForm> model, HttpServletRequest request) {
 
 		if (result.hasErrors()) {
 			return "loginForm";
@@ -40,7 +49,7 @@ public class LoginController {
 
 		
 
-		if (!isValidUser(loginForm)) {
+		if (!isValidUser(loginForm, request)) {
 			return "loginError";
 		}
 
@@ -48,7 +57,7 @@ public class LoginController {
 		return "loginSuccess";
 	}
 	
-	private boolean isValidUser(LoginForm loginForm) {
+	private boolean isValidUser(LoginForm loginForm, HttpServletRequest request) {
 		boolean isValid = false;
 		String username = loginForm.getUserName();
 		String password = loginForm.getPassword();
@@ -58,14 +67,26 @@ public class LoginController {
 		byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
 		String base64Creds = new String(base64CredsBytes);
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic " + base64Creds);
 		
-		RestTemplate restTemplate = new RestTemplate();
 		
-		HttpEntity<String> request = new HttpEntity<String>(headers);
-		ResponseEntity<UserToken> response = restTemplate.exchange("https://www.pivotaltracker.com/services/v3/tokens/active", HttpMethod.GET, request, UserToken.class);
-		isValid = "200".equals(response.getStatusCode());
+		List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+	    acceptableMediaTypes.add(MediaType.APPLICATION_XML);
+	    
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_XML);
+	    headers.setAccept(acceptableMediaTypes);
+	    headers.add("Authorization", "Basic " + base64Creds);
+	    
+	    HttpEntity<UserToken> getTokenRequest = new HttpEntity<UserToken>(headers);
+
+		
+		
+		ResponseEntity<UserToken> response = restTemplate.exchange("https://www.pivotaltracker.com/services/v3/tokens/active", HttpMethod.GET, getTokenRequest, UserToken.class);
+		
+		if(response != null && 200 == response.getStatusCode().value()) {
+			request.getSession().setAttribute("X-TrackerToken", response.getBody().getGuid());
+			return true;
+		}
 		
 		return isValid;
 	}

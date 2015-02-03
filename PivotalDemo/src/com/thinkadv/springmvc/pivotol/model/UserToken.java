@@ -1,7 +1,14 @@
 package com.thinkadv.springmvc.pivotol.model;
 
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+
+@XmlRootElement(name="token")
 public class UserToken {
 private String guid;
+@Id
 private int id;
 public String getGuid() {
 	return guid;

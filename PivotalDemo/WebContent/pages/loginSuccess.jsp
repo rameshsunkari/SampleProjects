@@ -18,7 +18,7 @@
 <body>
 
 	<h3>
-		Welcome
+		Welcome : ${loginForm.userName }
 		<%-- <core:out value="${loginForm.userName}" /> --%>
 	</h3>
 
