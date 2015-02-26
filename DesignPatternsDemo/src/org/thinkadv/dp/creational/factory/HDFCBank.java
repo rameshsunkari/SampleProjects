@@ -1,4 +1,4 @@
-package org.thinkadv.dp.factory;
+package org.thinkadv.dp.creational.factory;
 
 public class HDFCBank extends AbstractBank {
 

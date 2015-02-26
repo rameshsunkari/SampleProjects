@@ -1,6 +1,6 @@
-package org.thinkadv.dp.factory;
+package org.thinkadv.dp.creational.factory;
 
-import org.thinkadv.dp.abstractfactory.AbstractFactory;
+import org.thinkadv.dp.creational.abstractfactory.AbstractFactory;
 
 public class LoanFactory implements AbstractFactory {
 

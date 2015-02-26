@@ -1,4 +1,4 @@
-package org.thinkadv.dp.factory;
+package org.thinkadv.dp.creational.factory;
 
 import java.io.BufferedReader;
 import java.io.IOException;

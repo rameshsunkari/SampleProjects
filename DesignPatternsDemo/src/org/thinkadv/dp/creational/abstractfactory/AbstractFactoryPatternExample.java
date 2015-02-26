@@ -1,11 +1,11 @@
-package org.thinkadv.dp.abstractfactory;
+package org.thinkadv.dp.creational.abstractfactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.thinkadv.dp.factory.Bank;
-import org.thinkadv.dp.factory.Loan;
+import org.thinkadv.dp.creational.factory.Bank;
+import org.thinkadv.dp.creational.factory.Loan;
 
 public class AbstractFactoryPatternExample {
 

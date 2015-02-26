@@ -1,4 +1,4 @@
-package org.thinkadv.dp.factory;
+package org.thinkadv.dp.creational.factory;
 
 public interface Loan {
 	public void setInterestRate(double rate);

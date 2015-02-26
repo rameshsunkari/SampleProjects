@@ -1,7 +1,7 @@
-package org.thinkadv.dp.abstractfactory;
+package org.thinkadv.dp.creational.abstractfactory;
 
-import org.thinkadv.dp.factory.BankFactory;
-import org.thinkadv.dp.factory.LoanFactory;
+import org.thinkadv.dp.creational.factory.BankFactory;
+import org.thinkadv.dp.creational.factory.LoanFactory;
 
 public class FactoryCreator {
 	public static AbstractFactory getFactory(String choice) {
